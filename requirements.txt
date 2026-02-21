@@ -5,3 +5,4 @@ tensorflow
 pygame
 plotly
 streamlit
+streamlit-webrtc
