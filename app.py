@@ -111,7 +111,8 @@ if mode == "Real-Time Detection":
         ear_thresh = st.slider("", 0.10, 0.40, 0.23, 0.01, key="ear_slider")
     with col2:
         st.markdown('<p class="slider-label">Yawn Confidence (Threshold):</p>', unsafe_allow_html=True)
-        yawn_thresh = st.slider("", 0.10, 0.90, 0.50, 0.05, key="yawn_slider")
+        ## yawn_thresh = st.slider("", 0.10, 0.90, 0.50, 0.05, key="yawn_slider")
+        yawn_thresh = st.slider("Yawn Threshold", 0.10, 0.90, 0.50, 0.05, key="yawn_slider", label_visibility="collapsed")
 
     frame_placeholder = st.empty()
     
