@@ -1,11 +1,10 @@
 opencv-python-headless
 mediapipe
 numpy
-tensorflow
-pygame
-plotly
-streamlit
-streamlit-webrtc
-
 tensorflow-cpu
-
+pygame
+streamlit-webrtc
+streamlit-option-menu
+plotly
+pandas
+pillow
