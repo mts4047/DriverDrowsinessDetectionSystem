@@ -6,3 +6,6 @@ pygame
 plotly
 streamlit
 streamlit-webrtc
+
+tensorflow-cpu
+
