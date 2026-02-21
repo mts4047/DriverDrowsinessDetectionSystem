@@ -35,7 +35,10 @@ st.markdown("""
 # --- LOAD MODELS ---
 @st.cache_resource
 def load_resources():
-    mouth_model = tf.keras.models.load_model(YAWN_MODEL_PATH)
+    # 1. Load Alert System first
+    alert_sys = AlertSystem(ALARM_SOUND_PATH)
+    
+    # 2. Load Mediapipe (Lighter than TF)
     from mediapipe.tasks import python
     from mediapipe.tasks.python import vision
     base_options = python.BaseOptions(model_asset_path=FACE_LANDMARKER_PATH)
@@ -45,9 +48,12 @@ def load_resources():
         num_faces=1
     )
     face_landmarker = vision.FaceLandmarker.create_from_options(options)
-    alert_sys = AlertSystem(ALARM_SOUND_PATH)
+    
+    # 3. Load TensorFlow Mouth Model last
+    # We load it inside the function to keep the global namespace clean
+    mouth_model = tf.keras.models.load_model(YAWN_MODEL_PATH, compile=False)
+    
     return mouth_model, face_landmarker, alert_sys
-
 mouth_model, face_landmarker, alert = load_resources()
 
 # --- WEBRTC VIDEO PROCESSOR ---
