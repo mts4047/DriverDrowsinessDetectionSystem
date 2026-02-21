@@ -6,19 +6,20 @@ class AlertSystem:
         self.enabled = False
         if os.path.exists(sound_path):
             try:
-                # Attempt to initialize the mixer
+                # Tell pygame to use a dummy audio driver for headless servers
+                os.environ['SDL_VIDEODRIVER'] = 'dummy'
+                os.environ['SDL_AUDIODRIVER'] = 'dummy'
                 pygame.mixer.init()
                 self.sound = pygame.mixer.Sound(sound_path)
                 self.enabled = True
-            except pygame.error as e:
-                # This will happen on Streamlit Cloud
-                print(f"⚠️ Audio device not found: {e}. Alerts will be visual only.")
+            except Exception as e:
+                print(f"Audio initialization failed: {e}")
         else:
-            print("⚠️ Alarm sound file not found.")
+            print("⚠️ Alarm sound not found")
 
     def play(self):
         if self.enabled:
             try:
                 self.sound.play()
-            except Exception:
-                pass # Prevent crash if play fails
+            except:
+                pass
